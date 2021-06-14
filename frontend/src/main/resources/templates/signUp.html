@@ -7,7 +7,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
   <meta charset="UTF-8">
-  <title>Sign In</title>
+  <title>Sign Up</title>
 </head>
 <body>
 <div th:insert="/navbar::navbar"></div>
@@ -16,6 +16,15 @@
   <div class="col-7">
     <form th:action="@{/signUp}" method="post" >
       <h3>Sign up</h3>
+      <div th:if="${passIn}" class="text-danger">
+        Password doesn't match.
+      </div>
+      <div th:if="${error}" class="text-danger">
+        Something gone wrong.
+      </div>
+      <div th:if="${userExist}" class="text-danger">
+        User already exist.
+      </div>
       <table>
         <tr>
           <td><label for="username">Username: </label></td>
