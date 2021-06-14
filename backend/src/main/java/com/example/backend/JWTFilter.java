@@ -20,7 +20,7 @@ public class JWTFilter extends BasicAuthenticationFilter {
     private String secret;
 
 
-    public JWTFilter(AuthenticationManager authenticationManager) {
+    public JWTFilter(AuthenticationManager authenticationManager, String secret) {
         super(authenticationManager);
         this.secret = secret;
     }
@@ -28,7 +28,20 @@ public class JWTFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        System.out.println(request.getHeader("Authorization"));
-        System.out.println(response.getHeader("Authorization"));
+        String authorization = request.getHeader("Authorization");
+
+        if(authorization != null){
+            authorization = authorization.substring(7);
+            Claims body = Jwts.parser().setSigningKey(secret)
+                    .parseClaimsJws(authorization).getBody();
+            String username = body.get("username").toString();
+
+            Set<SimpleGrantedAuthority> user = Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
+                    = new UsernamePasswordAuthenticationToken(username, null, user);
+            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+        }
+        chain.doFilter(request, response);
     }
 }

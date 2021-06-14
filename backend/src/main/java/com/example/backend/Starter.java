@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class Starter {
 
@@ -29,7 +32,9 @@ public class Starter {
         bookService.addBook(book2);
         bookService.addBook(book3);
 
-        User user = new User("user", passwordEncoder.encode("user"), "ROLE_USER");
+        List<Book> bookList = new ArrayList<>();
+
+        User user = new User("user", passwordEncoder.encode("user"), "ROLE_USER", bookList);
         userService.saveUser(user);
     }
 }

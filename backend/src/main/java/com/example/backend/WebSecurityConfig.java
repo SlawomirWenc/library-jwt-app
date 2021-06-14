@@ -1,5 +1,6 @@
 package com.example.backend;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,6 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Value("${secret}")
+    String secret;
+
     @Bean
     public PasswordEncoder getPasswordEncoder(){
         return new BCryptPasswordEncoder();
@@ -19,8 +23,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
+
         http.authorizeRequests()
                 .antMatchers("/books").permitAll()
                 .antMatchers(HttpMethod.POST, "/signUp").permitAll();
+
+        http.authorizeRequests()
+                .antMatchers("/booksByUsername").authenticated()
+                .antMatchers(HttpMethod.POST, "/addBook").authenticated()
+                .antMatchers(HttpMethod.POST, "/removeBook").authenticated()
+                .and()
+                .addFilter(new JWTFilter(authenticationManager(), secret));
     }
 }

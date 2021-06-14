@@ -1,5 +1,7 @@
 package com.example.frontend.model;
 
+import java.util.List;
+
 public class User {
 
     private Long id;
@@ -10,6 +12,8 @@ public class User {
 
     private String role;
 
+    private List<Book> bookList;
+
     public User() {
     }
 
@@ -17,6 +21,13 @@ public class User {
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    public User(String username, String password, String role, List<Book> bookList) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.bookList = bookList;
     }
 
     @Override
@@ -59,5 +70,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
     }
 }

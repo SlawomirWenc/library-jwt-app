@@ -1,9 +1,8 @@
 package com.example.backend.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.apache.tomcat.jni.Library;
+
+import javax.persistence.*;
 
 @Entity
 public class Book {
@@ -32,7 +31,6 @@ public class Book {
         this.yearOfPublication = yearOfPublication;
         this.numberOfPages = numberOfPages;
     }
-
 
     public Book(Long id, String title, String author, String publishingHouse, int yearOfPublication, int numberOfPages) {
         this.id = id;
@@ -90,4 +88,5 @@ public class Book {
     public void setNumberOfPages(int numberOfPages) {
         this.numberOfPages = numberOfPages;
     }
+
 }

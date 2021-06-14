@@ -64,7 +64,7 @@ public class UserController {
                 .claim("username", username)
                 .claim("role", role)
                 .setIssuedAt(new Date(currentTimeMillis))
-                .setExpiration(new Date(currentTimeMillis + 300000))
+                .setExpiration(new Date(currentTimeMillis + 600000))
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
         return token;

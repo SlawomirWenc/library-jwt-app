@@ -1,9 +1,7 @@
 package com.example.backend.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -18,14 +16,24 @@ public class User {
 
     private String role;
 
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Book.class)
+    @JoinColumn(name="user_id")
+    private List<Book> bookList;
+
     public User() {
     }
-
 
     public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    public User(String username, String password, String role, List<Book> bookList) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.bookList = bookList;
     }
 
     public Long getId() {
@@ -58,6 +66,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
     }
 
     @Override
