@@ -26,12 +26,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/books").permitAll()
-                .antMatchers(HttpMethod.POST, "/signUp").permitAll();
+                .antMatchers( "/signUp", "/signIn").permitAll();
 
         http.authorizeRequests()
-                .antMatchers("/booksByUsername").authenticated()
-                .antMatchers(HttpMethod.POST, "/addBook").authenticated()
-                .antMatchers(HttpMethod.POST, "/removeBook").authenticated()
+                .antMatchers("/booksByUsername", "/addBook", "/removeBook").authenticated()
                 .and()
                 .addFilter(new JWTFilter(authenticationManager(), secret));
     }

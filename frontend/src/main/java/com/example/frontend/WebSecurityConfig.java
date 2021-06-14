@@ -13,9 +13,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/signUp").permitAll()
-                .antMatchers("/signIn").permitAll()
-                .antMatchers("/library").authenticated()
+                .antMatchers("/signUp", "/signIn").permitAll()
+                .antMatchers("/library", "/addBook", "/removeBook").authenticated()
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/signIn?logout").permitAll();
     }
