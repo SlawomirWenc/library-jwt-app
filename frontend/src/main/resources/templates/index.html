@@ -10,5 +10,27 @@
 </head>
 <body>
 <div th:insert="/navbar::navbar"></div>
+<table class="table">
+    <thead class="thead-light">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Author</th>
+        <th scope="col">Publishing House</th>
+        <th scope="col">Year Of Publication</th>
+        <th scope="col">Number Of Pages</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book: ${books}">
+        <th scope="row" th:text="${book.getId()}"></th>
+        <td th:text="${book.getTitle()}"></td>
+        <td th:text="${book.getAuthor()}"></td>
+        <td th:text="${book.getPublishingHouse()}"></td>
+        <td th:text="${book.getYearOfPublication()}"></td>
+        <td th:text="${book.getNumberOfPages()}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
