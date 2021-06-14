@@ -35,8 +35,9 @@ public class JWTFilter extends BasicAuthenticationFilter {
             Claims body = Jwts.parser().setSigningKey(secret)
                     .parseClaimsJws(authorization).getBody();
             String username = body.get("username").toString();
+            String role = body.get("role").toString();
 
-            Set<SimpleGrantedAuthority> user = Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+            Set<SimpleGrantedAuthority> user = Collections.singleton(new SimpleGrantedAuthority(role));
 
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
                     = new UsernamePasswordAuthenticationToken(username, null, user);

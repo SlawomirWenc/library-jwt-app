@@ -20,7 +20,7 @@
             <a class="dropdown-item" sec:authorize="isAnonymous()" th:href="@{/signIn}">Sign in</a>
             <a class="dropdown-item" sec:authorize="isAnonymous()" th:href="@{/signUp}">Sign Up</a>
             <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/library}">My library</a>
-            <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/admin-panel}">Admin panel</a>
+            <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/adminPanel}">Admin panel</a>
             <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
           </div>
         </div>

@@ -34,7 +34,9 @@ public class Starter {
 
         List<Book> bookList = new ArrayList<>();
 
+        User admin = new User("admin", passwordEncoder.encode("admin"), "ROLE_ADMIN", bookList);
         User user = new User("user", passwordEncoder.encode("user"), "ROLE_USER", bookList);
+        userService.saveUser(admin);
         userService.saveUser(user);
     }
 }

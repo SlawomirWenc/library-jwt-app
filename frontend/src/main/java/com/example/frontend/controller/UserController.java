@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -101,6 +102,16 @@ public class UserController {
         }
         model.addAttribute("passIn", "true");
         return "signUp";
+    }
+
+    @GetMapping("/adminPanel")
+    public String getAdminPanelPage(Model model){
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<User[]> exchange = restTemplate.exchange("http://localhost:4040/users", HttpMethod.GET, HttpEntity.EMPTY, User[].class);
+        User[] body = exchange.getBody();
+
+        model.addAttribute("users", body);
+        return "adminPanel";
     }
 
 }
