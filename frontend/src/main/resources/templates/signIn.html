@@ -10,12 +10,11 @@
   <title>Sign In</title>
 </head>
 <body>
-<body>
 <div th:insert="/navbar::navbar"></div>
 <div class="row">
   <div class="col-5"></div>
   <div class="col-md-2">
-    <form th:action="@{/signIn}" method="post" >
+    <form th:action="@{/signIn}" method="post">
       <h3>Sign in</h3>
       <div th:if="${param.logout}" class="text-success">
         You have been successfully logged out.
