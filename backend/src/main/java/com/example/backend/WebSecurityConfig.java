@@ -30,6 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/booksByUsername", "/addBook", "/removeBook").authenticated()
+                .antMatchers("/users", "/createUser", "/deleteUser", "/getUser", "/updateUser").hasRole("ADMIN")
                 .and()
                 .addFilter(new JWTFilter(authenticationManager(), secret));
     }

@@ -12,10 +12,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/signUp", "/signIn").permitAll()
+                .antMatchers("/", "/signUp", "/signIn").permitAll()
                 .antMatchers("/library", "/addBook", "/removeBook").authenticated()
-                .antMatchers("/admin-panel").hasRole("ADMIN")
+                .antMatchers("/adminPanel", "/createUser", "/updateUser", "/modifyUser", "/deleteUser").hasRole("ADMIN")
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/signIn?logout").permitAll();
     }

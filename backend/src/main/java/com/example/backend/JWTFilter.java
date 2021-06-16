@@ -27,7 +27,6 @@ public class JWTFilter extends BasicAuthenticationFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-
         String authorization = request.getHeader("Authorization");
 
         if(authorization != null){

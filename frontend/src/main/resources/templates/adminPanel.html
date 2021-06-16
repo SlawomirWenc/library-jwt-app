@@ -11,8 +11,7 @@
 </head>
 <body>
 <div th:insert="/navbar::navbar"></div>
-<a class="btn btn-success" th:href="@{/create-user}">Create new user</a>
-
+<a class="btn btn-success" th:href="@{/createUser}">Create new user</a>
 <table class="table">
   <thead class="thead-light">
   <tr>
@@ -29,13 +28,13 @@
     <td th:text="${user.getPassword()}"></td>
     <td th:text="${user.getRole()}"></td>
     <td>
-      <form th:action="@{/modify}" method="post">
+      <form th:action="@{/modifyUser}" method="get">
         <input type="hidden" name="id" th:value="${user.getId()}" />
         <input type="submit" class="btn btn-primary" value="Modify">
       </form>
     </td>
     <td>
-      <form th:action="@{/deleteById}" method="post">
+      <form th:action="@{/deleteUser}" method="post">
         <input type="hidden" name="id" th:value="${user.getId()}" />
         <input type="submit" class="btn btn-danger" value="Delete">
       </form>
